@@ -61,7 +61,21 @@ public final class SauceEnvironmentUtil {
 
                 browserAsJSON(browsersJSON, browserInstance, userName, apiKey);
                 //output SELENIUM_DRIVER for the first browser so that the Selenium Client Factory picks up a valid uri pattern
-                outputEnvironmentVariable(env, SauceOnDemandBuildWrapper.SELENIUM_DRIVER, browserInstance.getUri(userName, apiKey), verboseLogging, logger);
+
+                System.out.println("env is " + env);
+                System.out.println("Driver is " + SauceOnDemandBuildWrapper.SELENIUM_DRIVER);
+                System.out.println("browserInstance.getUri is " + browserInstance.getUri(userName, apiKey));
+                System.out.println("verboseLogging is  " + verboseLogging);
+                System.out.println("logger is " + logger);
+
+                try{
+                    outputEnvironmentVariable(env, SauceOnDemandBuildWrapper.SELENIUM_DRIVER, browserInstance.getUri(userName, apiKey), verboseLogging, logger);
+
+                }catch (Exception e){
+                    System.out.println("ERROR outputting environment variable");
+                    System.out.println(e);
+                    e.printStackTrace();
+                }
             }
             outputEnvironmentVariable(env, SauceOnDemandBuildWrapper.SAUCE_ONDEMAND_BROWSERS, browsersJSON.toString(), verboseLogging, logger);
 
